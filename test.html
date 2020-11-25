@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <script>
+      var div
+      var num = 0
+
+      init()
+      function init() {
+        div = document.getElementById('div1')
+        console.log(div)
+        selectLight()
+      }
+
+      function light(time, color) {
+        return new Promise(function (res, rej) {
+          num = setTimeout(res, time)
+          div.style.backgroundColor = color
+        })
+      }
+
+      function selectLight() {
+        light(3000, '#f00')
+          .then(function (res, rej) {
+            // clearTimeout(num)
+            return light(1000, '#ff0')
+          })
+          .then(function () {
+            // clearTimeout(num)
+            return light(3000, '#0f0')
+          })
+          .then(function () {
+            // clearTimeout(num)
+            selectLight()
+          })
+      }
+    </script>
+  </body>
+</html>
